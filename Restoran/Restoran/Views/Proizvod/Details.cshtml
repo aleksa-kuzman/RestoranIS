@@ -1,0 +1,64 @@
+﻿@model Restoran.ViewModels.ProizvodViewModel
+@using Restoran.Models
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detaljno</h2>
+
+<div>
+    <h4>Proizvod</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.naziv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lager)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lager)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cena) RSD
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Tip proizvoda")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipProizvod.Naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Dobavljač")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dobavljac.Naziv)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole(RoleName.MozeDaRadiSve))
+    {
+        @Html.ActionLink("Izmeni proizvod", "Edit", new { id = Model.proizvodId });
+        
+
+    }
+    
+    |@Html.ActionLink("Nazad na listu", "Index")
+</p>

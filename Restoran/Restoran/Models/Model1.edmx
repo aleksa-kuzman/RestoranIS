@@ -1,0 +1,998 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RestoranModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dobavljac">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ImePrezime" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Porudzbenica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DobavljacId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proizvod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Lager" Type="int" Nullable="false" />
+          <Property Name="Cena" Type="int" Nullable="false" />
+          <Property Name="TipProizvodaId" Type="int" Nullable="false" />
+          <Property Name="DobavljacId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Racun">
+          <Key>
+            <PropertyRef Name="SifraRacuna" />
+          </Key>
+          <Property Name="SifraRacuna" Type="int" Nullable="false" />
+          <Property Name="BrojStola" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rezervacija">
+          <Key>
+            <PropertyRef Name="BrojStola" />
+            <PropertyRef Name="GostId" />
+            <PropertyRef Name="DatumVreme" />
+          </Key>
+          <Property Name="BrojStola" Type="int" Nullable="false" />
+          <Property Name="GostId" Type="int" Nullable="false" />
+          <Property Name="DatumVreme" Type="datetime" Nullable="false" />
+          <Property Name="BrojRezervacije" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sektor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StavkaPorudzbenice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProizvodId" Type="int" Nullable="false" />
+          <Property Name="PorudzbenicaId" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StavkaRacuna">
+          <Key>
+            <PropertyRef Name="StavkaId" />
+          </Key>
+          <Property Name="SifraRacuna" Type="int" Nullable="false" />
+          <Property Name="ProizvodId" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" Nullable="false" />
+          <Property Name="StavkaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sto">
+          <Key>
+            <PropertyRef Name="BrojStola" />
+          </Key>
+          <Property Name="BrojStola" Type="int" Nullable="false" />
+          <Property Name="SektorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipProizvod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Porudzben__Dobav__5441852A">
+          <End Role="Dobavljac" Type="Self.Dobavljac" Multiplicity="1" />
+          <End Role="Porudzbenica" Type="Self.Porudzbenica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Porudzbenica">
+              <PropertyRef Name="DobavljacId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__Dobavl__70DDC3D8">
+          <End Role="Dobavljac" Type="Self.Dobavljac" Multiplicity="1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="DobavljacId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__TipPro__6FE99F9F">
+          <End Role="TipProizvod" Type="Self.TipProizvod" Multiplicity="1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipProizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="TipProizvodaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Racun__BrojStola__5535A963">
+          <End Role="Sto" Type="Self.Sto" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sto">
+              <PropertyRef Name="BrojStola" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="BrojStola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezervaci__BrojS__5629CD9C">
+          <End Role="Sto" Type="Self.Sto" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sto">
+              <PropertyRef Name="BrojStola" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="BrojStola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezervaci__GostI__571DF1D5">
+          <End Role="Gost" Type="Self.Gost" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="GostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaPor__Porud__5812160E">
+          <End Role="Porudzbenica" Type="Self.Porudzbenica" Multiplicity="1" />
+          <End Role="StavkaPorudzbenice" Type="Self.StavkaPorudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Porudzbenica">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StavkaPorudzbenice">
+              <PropertyRef Name="PorudzbenicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaPor__Proiz__59063A47">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="1" />
+          <End Role="StavkaPorudzbenice" Type="Self.StavkaPorudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StavkaPorudzbenice">
+              <PropertyRef Name="ProizvodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaRac__Proiz__59FA5E80">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="1" />
+          <End Role="StavkaRacuna" Type="Self.StavkaRacuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StavkaRacuna">
+              <PropertyRef Name="ProizvodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaRac__Sifra__5AEE82B9">
+          <End Role="Racun" Type="Self.Racun" Multiplicity="1" />
+          <End Role="StavkaRacuna" Type="Self.StavkaRacuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Racun">
+              <PropertyRef Name="SifraRacuna" />
+            </Principal>
+            <Dependent Role="StavkaRacuna">
+              <PropertyRef Name="SifraRacuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sto__SektorId__5BE2A6F2">
+          <End Role="Sektor" Type="Self.Sektor" Multiplicity="1" />
+          <End Role="Sto" Type="Self.Sto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sektor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sto">
+              <PropertyRef Name="SektorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestoranModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dobavljac" EntityType="Self.Dobavljac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gost" EntityType="Self.Gost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Porudzbenica" EntityType="Self.Porudzbenica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proizvod" EntityType="Self.Proizvod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Racun" EntityType="Self.Racun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rezervacija" EntityType="Self.Rezervacija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sektor" EntityType="Self.Sektor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StavkaPorudzbenice" EntityType="Self.StavkaPorudzbenice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StavkaRacuna" EntityType="Self.StavkaRacuna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sto" EntityType="Self.Sto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipProizvod" EntityType="Self.TipProizvod" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Porudzben__Dobav__5441852A" Association="Self.FK__Porudzben__Dobav__5441852A">
+            <End Role="Dobavljac" EntitySet="Dobavljac" />
+            <End Role="Porudzbenica" EntitySet="Porudzbenica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__Dobavl__70DDC3D8" Association="Self.FK__Proizvod__Dobavl__70DDC3D8">
+            <End Role="Dobavljac" EntitySet="Dobavljac" />
+            <End Role="Proizvod" EntitySet="Proizvod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__TipPro__6FE99F9F" Association="Self.FK__Proizvod__TipPro__6FE99F9F">
+            <End Role="TipProizvod" EntitySet="TipProizvod" />
+            <End Role="Proizvod" EntitySet="Proizvod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Racun__BrojStola__5535A963" Association="Self.FK__Racun__BrojStola__5535A963">
+            <End Role="Sto" EntitySet="Sto" />
+            <End Role="Racun" EntitySet="Racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezervaci__BrojS__5629CD9C" Association="Self.FK__Rezervaci__BrojS__5629CD9C">
+            <End Role="Sto" EntitySet="Sto" />
+            <End Role="Rezervacija" EntitySet="Rezervacija" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezervaci__GostI__571DF1D5" Association="Self.FK__Rezervaci__GostI__571DF1D5">
+            <End Role="Gost" EntitySet="Gost" />
+            <End Role="Rezervacija" EntitySet="Rezervacija" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaPor__Porud__5812160E" Association="Self.FK__StavkaPor__Porud__5812160E">
+            <End Role="Porudzbenica" EntitySet="Porudzbenica" />
+            <End Role="StavkaPorudzbenice" EntitySet="StavkaPorudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaPor__Proiz__59063A47" Association="Self.FK__StavkaPor__Proiz__59063A47">
+            <End Role="Proizvod" EntitySet="Proizvod" />
+            <End Role="StavkaPorudzbenice" EntitySet="StavkaPorudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaRac__Proiz__59FA5E80" Association="Self.FK__StavkaRac__Proiz__59FA5E80">
+            <End Role="Proizvod" EntitySet="Proizvod" />
+            <End Role="StavkaRacuna" EntitySet="StavkaRacuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaRac__Sifra__5AEE82B9" Association="Self.FK__StavkaRac__Sifra__5AEE82B9">
+            <End Role="Racun" EntitySet="Racun" />
+            <End Role="StavkaRacuna" EntitySet="StavkaRacuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sto__SektorId__5BE2A6F2" Association="Self.FK__Sto__SektorId__5BE2A6F2">
+            <End Role="Sektor" EntitySet="Sektor" />
+            <End Role="Sto" EntitySet="Sto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestoranModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dobavljac">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Porudzbenicas" Relationship="Self.FK__Porudzben__Dobav__74AE54BC" FromRole="Dobavljac" ToRole="Porudzbenica" />
+          <NavigationProperty Name="Proizvods" Relationship="RestoranModel.FK__Proizvod__Dobavl__70DDC3D8" FromRole="Dobavljac" ToRole="Proizvod" />
+        </EntityType>
+        <EntityType Name="Gost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ImePrezime" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Rezervacijas" Relationship="Self.FK__Rezervaci__GostI__3E52440B" FromRole="Gost" ToRole="Rezervacija" />
+        </EntityType>
+        <EntityType Name="Porudzbenica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DobavljacId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dobavljac" Relationship="Self.FK__Porudzben__Dobav__74AE54BC" FromRole="Porudzbenica" ToRole="Dobavljac" />
+          <NavigationProperty Name="StavkaPorudzbenices" Relationship="Self.FK__StavkaPor__Porud__787EE5A0" FromRole="Porudzbenica" ToRole="StavkaPorudzbenice" />
+        </EntityType>
+        <EntityType Name="Proizvod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lager" Type="Int32" Nullable="false" />
+          <Property Name="Cena" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StavkaPorudzbenices" Relationship="Self.FK__StavkaPor__Proiz__778AC167" FromRole="Proizvod" ToRole="StavkaPorudzbenice" />
+          <NavigationProperty Name="StavkaRacunas" Relationship="Self.FK__StavkaRac__Proiz__4F7CD00D" FromRole="Proizvod" ToRole="StavkaRacuna" />
+          <Property Name="TipProizvodaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TipProizvod" Relationship="RestoranModel.FK__Proizvod__TipPro__6FE99F9F" FromRole="Proizvod" ToRole="TipProizvod" />
+          <Property Name="DobavljacId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dobavljac" Relationship="RestoranModel.FK__Proizvod__Dobavl__70DDC3D8" FromRole="Proizvod" ToRole="Dobavljac" />
+        </EntityType>
+        <EntityType Name="Racun">
+          <Key>
+            <PropertyRef Name="SifraRacuna" />
+          </Key>
+          <Property Name="SifraRacuna" Type="Int32" Nullable="false" />
+          <Property Name="BrojStola" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sto" Relationship="Self.FK__Racun__BrojStola__5AEE82B9" FromRole="Racun" ToRole="Sto" />
+          <NavigationProperty Name="StavkaRacunas" Relationship="Self.FK__StavkaRac__Sifra__4E88ABD4" FromRole="Racun" ToRole="StavkaRacuna" />
+        </EntityType>
+        <EntityType Name="Rezervacija">
+          <Key>
+            <PropertyRef Name="BrojStola" />
+            <PropertyRef Name="GostId" />
+            <PropertyRef Name="DatumVreme" />
+          </Key>
+          <Property Name="BrojStola" Type="Int32" Nullable="false" />
+          <Property Name="GostId" Type="Int32" Nullable="false" />
+          <Property Name="DatumVreme" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BrojRezervacije" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Gost" Relationship="Self.FK__Rezervaci__GostI__3E52440B" FromRole="Rezervacija" ToRole="Gost" />
+          <NavigationProperty Name="Sto" Relationship="Self.FK__Rezervaci__BrojS__3D5E1FD2" FromRole="Rezervacija" ToRole="Sto" />
+        </EntityType>
+        <EntityType Name="Sektor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Stoes" Relationship="Self.FK__Sto__SektorId__6FE99F9F" FromRole="Sektor" ToRole="Sto" />
+        </EntityType>
+        <EntityType Name="StavkaPorudzbenice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProizvodId" Type="Int32" Nullable="false" />
+          <Property Name="PorudzbenicaId" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Porudzbenica" Relationship="Self.FK__StavkaPor__Porud__787EE5A0" FromRole="StavkaPorudzbenice" ToRole="Porudzbenica" />
+          <NavigationProperty Name="Proizvod" Relationship="Self.FK__StavkaPor__Proiz__778AC167" FromRole="StavkaPorudzbenice" ToRole="Proizvod" />
+        </EntityType>
+        <EntityType Name="StavkaRacuna">
+          <Key>
+            <PropertyRef Name="StavkaId" />
+          </Key>
+          <Property Name="SifraRacuna" Type="Int32" Nullable="false" />
+          <Property Name="ProizvodId" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" Nullable="false" />
+          <Property Name="StavkaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Proizvod" Relationship="Self.FK__StavkaRac__Proiz__4F7CD00D" FromRole="StavkaRacuna" ToRole="Proizvod" />
+          <NavigationProperty Name="Racun" Relationship="Self.FK__StavkaRac__Sifra__4E88ABD4" FromRole="StavkaRacuna" ToRole="Racun" />
+        </EntityType>
+        <EntityType Name="Sto">
+          <Key>
+            <PropertyRef Name="BrojStola" />
+          </Key>
+          <Property Name="BrojStola" Type="Int32" Nullable="false" />
+          <Property Name="SektorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Racuns" Relationship="Self.FK__Racun__BrojStola__5AEE82B9" FromRole="Sto" ToRole="Racun" />
+          <NavigationProperty Name="Rezervacijas" Relationship="Self.FK__Rezervaci__BrojS__3D5E1FD2" FromRole="Sto" ToRole="Rezervacija" />
+          <NavigationProperty Name="Sektor" Relationship="Self.FK__Sto__SektorId__6FE99F9F" FromRole="Sto" ToRole="Sektor" />
+        </EntityType>
+        <Association Name="FK__Porudzben__Dobav__74AE54BC">
+          <End Role="Dobavljac" Type="Self.Dobavljac" Multiplicity="1" />
+          <End Role="Porudzbenica" Type="Self.Porudzbenica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Porudzbenica">
+              <PropertyRef Name="DobavljacId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezervaci__GostI__3E52440B">
+          <End Role="Gost" Type="Self.Gost" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="GostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaPor__Porud__787EE5A0">
+          <End Role="Porudzbenica" Type="Self.Porudzbenica" Multiplicity="1" />
+          <End Role="StavkaPorudzbenice" Type="Self.StavkaPorudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Porudzbenica">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StavkaPorudzbenice">
+              <PropertyRef Name="PorudzbenicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaPor__Proiz__778AC167">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="1" />
+          <End Role="StavkaPorudzbenice" Type="Self.StavkaPorudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StavkaPorudzbenice">
+              <PropertyRef Name="ProizvodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaRac__Proiz__4F7CD00D">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="1" />
+          <End Role="StavkaRacuna" Type="Self.StavkaRacuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StavkaRacuna">
+              <PropertyRef Name="ProizvodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Racun__BrojStola__5AEE82B9">
+          <End Role="Sto" Type="Self.Sto" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sto">
+              <PropertyRef Name="BrojStola" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="BrojStola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaRac__Sifra__4E88ABD4">
+          <End Role="Racun" Type="Self.Racun" Multiplicity="1" />
+          <End Role="StavkaRacuna" Type="Self.StavkaRacuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Racun">
+              <PropertyRef Name="SifraRacuna" />
+            </Principal>
+            <Dependent Role="StavkaRacuna">
+              <PropertyRef Name="SifraRacuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezervaci__BrojS__3D5E1FD2">
+          <End Role="Sto" Type="Self.Sto" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sto">
+              <PropertyRef Name="BrojStola" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="BrojStola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sto__SektorId__6FE99F9F">
+          <End Role="Sektor" Type="Self.Sektor" Multiplicity="1" />
+          <End Role="Sto" Type="Self.Sto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sektor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sto">
+              <PropertyRef Name="SektorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestoranContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dobavljacs" EntityType="Self.Dobavljac" />
+          <EntitySet Name="Gosts" EntityType="Self.Gost" />
+          <EntitySet Name="Porudzbenicas" EntityType="Self.Porudzbenica" />
+          <EntitySet Name="Proizvods" EntityType="Self.Proizvod" />
+          <EntitySet Name="Racuns" EntityType="Self.Racun" />
+          <EntitySet Name="Rezervacijas" EntityType="Self.Rezervacija" />
+          <EntitySet Name="Sektors" EntityType="Self.Sektor" />
+          <EntitySet Name="StavkaPorudzbenices" EntityType="Self.StavkaPorudzbenice" />
+          <EntitySet Name="StavkaRacunas" EntityType="Self.StavkaRacuna" />
+          <EntitySet Name="Stoes" EntityType="Self.Sto" />
+          <AssociationSet Name="FK__Porudzben__Dobav__74AE54BC" Association="Self.FK__Porudzben__Dobav__74AE54BC">
+            <End Role="Dobavljac" EntitySet="Dobavljacs" />
+            <End Role="Porudzbenica" EntitySet="Porudzbenicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezervaci__GostI__3E52440B" Association="Self.FK__Rezervaci__GostI__3E52440B">
+            <End Role="Gost" EntitySet="Gosts" />
+            <End Role="Rezervacija" EntitySet="Rezervacijas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaPor__Porud__787EE5A0" Association="Self.FK__StavkaPor__Porud__787EE5A0">
+            <End Role="Porudzbenica" EntitySet="Porudzbenicas" />
+            <End Role="StavkaPorudzbenice" EntitySet="StavkaPorudzbenices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaPor__Proiz__778AC167" Association="Self.FK__StavkaPor__Proiz__778AC167">
+            <End Role="Proizvod" EntitySet="Proizvods" />
+            <End Role="StavkaPorudzbenice" EntitySet="StavkaPorudzbenices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaRac__Proiz__4F7CD00D" Association="Self.FK__StavkaRac__Proiz__4F7CD00D">
+            <End Role="Proizvod" EntitySet="Proizvods" />
+            <End Role="StavkaRacuna" EntitySet="StavkaRacunas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Racun__BrojStola__5AEE82B9" Association="Self.FK__Racun__BrojStola__5AEE82B9">
+            <End Role="Sto" EntitySet="Stoes" />
+            <End Role="Racun" EntitySet="Racuns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaRac__Sifra__4E88ABD4" Association="Self.FK__StavkaRac__Sifra__4E88ABD4">
+            <End Role="Racun" EntitySet="Racuns" />
+            <End Role="StavkaRacuna" EntitySet="StavkaRacunas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezervaci__BrojS__3D5E1FD2" Association="Self.FK__Rezervaci__BrojS__3D5E1FD2">
+            <End Role="Sto" EntitySet="Stoes" />
+            <End Role="Rezervacija" EntitySet="Rezervacijas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sto__SektorId__6FE99F9F" Association="Self.FK__Sto__SektorId__6FE99F9F">
+            <End Role="Sektor" EntitySet="Sektors" />
+            <End Role="Sto" EntitySet="Stoes" />
+          </AssociationSet>
+          <EntitySet Name="TipProizvods" EntityType="RestoranModel.TipProizvod" />
+          <AssociationSet Name="FK__Proizvod__TipPro__6FE99F9F" Association="RestoranModel.FK__Proizvod__TipPro__6FE99F9F">
+            <End Role="TipProizvod" EntitySet="TipProizvods" />
+            <End Role="Proizvod" EntitySet="Proizvods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__Dobavl__70DDC3D8" Association="RestoranModel.FK__Proizvod__Dobavl__70DDC3D8">
+            <End Role="Dobavljac" EntitySet="Dobavljacs" />
+            <End Role="Proizvod" EntitySet="Proizvods" />
+          </AssociationSet>
+          <EntitySet Name="AspNetRoles" EntityType="RestoranModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="RestoranModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="RestoranModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="RestoranModel.AspNetUser" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="RestoranModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="RestoranModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="RestoranModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TipProizvod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Proizvods" Relationship="RestoranModel.FK__Proizvod__TipPro__6FE99F9F" FromRole="TipProizvod" ToRole="Proizvod" />
+        </EntityType>
+        <Association Name="FK__Proizvod__TipPro__6FE99F9F">
+          <End Type="RestoranModel.TipProizvod" Role="TipProizvod" Multiplicity="1" />
+          <End Type="RestoranModel.Proizvod" Role="Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipProizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="TipProizvodaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__Dobavl__70DDC3D8">
+          <End Type="RestoranModel.Dobavljac" Role="Dobavljac" Multiplicity="1" />
+          <End Type="RestoranModel.Proizvod" Role="Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="DobavljacId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="RestoranModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="RestoranModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="RestoranModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="RestoranModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="RestoranModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="RestoranModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="RestoranModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="RestoranModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="RestoranModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="RestoranModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="RestoranModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="RestoranModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RestoranModelStoreContainer" CdmEntityContainer="RestoranContext">
+          <EntitySetMapping Name="Dobavljacs">
+            <EntityTypeMapping TypeName="RestoranModel.Dobavljac">
+              <MappingFragment StoreEntitySet="Dobavljac">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gosts">
+            <EntityTypeMapping TypeName="RestoranModel.Gost">
+              <MappingFragment StoreEntitySet="Gost">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ImePrezime" ColumnName="ImePrezime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Porudzbenicas">
+            <EntityTypeMapping TypeName="RestoranModel.Porudzbenica">
+              <MappingFragment StoreEntitySet="Porudzbenica">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DobavljacId" ColumnName="DobavljacId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proizvods">
+            <EntityTypeMapping TypeName="RestoranModel.Proizvod">
+              <MappingFragment StoreEntitySet="Proizvod">
+                <ScalarProperty Name="DobavljacId" ColumnName="DobavljacId" />
+                <ScalarProperty Name="TipProizvodaId" ColumnName="TipProizvodaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Lager" ColumnName="Lager" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Racuns">
+            <EntityTypeMapping TypeName="RestoranModel.Racun">
+              <MappingFragment StoreEntitySet="Racun">
+                <ScalarProperty Name="SifraRacuna" ColumnName="SifraRacuna" />
+                <ScalarProperty Name="BrojStola" ColumnName="BrojStola" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezervacijas">
+            <EntityTypeMapping TypeName="RestoranModel.Rezervacija">
+              <MappingFragment StoreEntitySet="Rezervacija">
+                <ScalarProperty Name="BrojStola" ColumnName="BrojStola" />
+                <ScalarProperty Name="GostId" ColumnName="GostId" />
+                <ScalarProperty Name="DatumVreme" ColumnName="DatumVreme" />
+                <ScalarProperty Name="BrojRezervacije" ColumnName="BrojRezervacije" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sektors">
+            <EntityTypeMapping TypeName="RestoranModel.Sektor">
+              <MappingFragment StoreEntitySet="Sektor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkaPorudzbenices">
+            <EntityTypeMapping TypeName="RestoranModel.StavkaPorudzbenice">
+              <MappingFragment StoreEntitySet="StavkaPorudzbenice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProizvodId" ColumnName="ProizvodId" />
+                <ScalarProperty Name="PorudzbenicaId" ColumnName="PorudzbenicaId" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkaRacunas">
+            <EntityTypeMapping TypeName="RestoranModel.StavkaRacuna">
+              <MappingFragment StoreEntitySet="StavkaRacuna">
+                <ScalarProperty Name="SifraRacuna" ColumnName="SifraRacuna" />
+                <ScalarProperty Name="ProizvodId" ColumnName="ProizvodId" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+                <ScalarProperty Name="StavkaId" ColumnName="StavkaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stoes">
+            <EntityTypeMapping TypeName="RestoranModel.Sto">
+              <MappingFragment StoreEntitySet="Sto">
+                <ScalarProperty Name="BrojStola" ColumnName="BrojStola" />
+                <ScalarProperty Name="SektorId" ColumnName="SektorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipProizvods">
+            <EntityTypeMapping TypeName="RestoranModel.TipProizvod">
+              <MappingFragment StoreEntitySet="TipProizvod">
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="RestoranModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="RestoranModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="RestoranModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="RestoranModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="RestoranModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

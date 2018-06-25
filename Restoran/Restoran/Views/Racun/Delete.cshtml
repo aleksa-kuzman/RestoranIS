@@ -1,0 +1,32 @@
+﻿@model Restoran.Models.Racun
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Zatvaranje racuna</h2>
+
+<h3>Sigurni ste da želite da zatvorite račun?</h3>
+<div>
+    <h4>Racun</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Sto.BrojStola)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sto.BrojStola)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Nazad na listu", "Index")
+        </div>
+    }
+</div>

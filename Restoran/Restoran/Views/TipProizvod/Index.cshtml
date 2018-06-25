@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Restoran.Models.TipProizvod>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tipovi proizvoda</h2>
+<table>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Naziv, "ProizvodPoTipu", new { id = item.Id })
+
+        </td>
+    </tr>
+    }
+</table>
+
+

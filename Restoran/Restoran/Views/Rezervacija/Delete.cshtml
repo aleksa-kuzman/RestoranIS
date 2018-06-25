@@ -1,0 +1,55 @@
+﻿@model Restoran.ViewModels.RezervacijaViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Otkazivanje rezervacije</h2>
+
+<h3>Sigurni ste da želite da otkažete rezervaciju?</h3>
+<div>
+    <h4>Rezervacija</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.brojRezervacije)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.brojRezervacije)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gostPrikaz.ImePrezime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gostPrikaz.ImePrezime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stoPrikaz.BrojStola)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stoPrikaz.BrojStola)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.datumVreme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datumVreme)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Nazad na listu", "Index")
+        </div>
+    }
+</div>

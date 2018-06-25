@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Restoran.Models.Rezervacija>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista rezervacija</h2>
+
+<p>
+    @Html.ActionLink("Napravi rezervaciju", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BrojRezervacije)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gost.ImePrezime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sto.BrojStola)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatumVreme)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BrojRezervacije)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gost.ImePrezime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sto.BrojStola)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DatumVreme)
+        </td>
+
+        <td>
+            @Html.ActionLink("Detaljno", "Details", new { /* id=item.PrimaryKey */id = item.BrojRezervacije }) |
+            @Html.ActionLink("Otkaži", "Delete", new { /* id=item.PrimaryKey */ id = item.BrojRezervacije })
+        </td>
+    </tr>
+}
+
+</table>

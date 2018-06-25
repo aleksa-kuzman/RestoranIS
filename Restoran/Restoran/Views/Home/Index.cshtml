@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Restoran.Models.Proizvod>
+@{
+    ViewBag.Title = "Home Page";
+}
+@using Restoran.Models
+@if (User.IsInRole(RoleName.MozeDaRadiSve) || User.IsInRole(RoleName.DodajeRacunePorudzbineRezervacije))
+{
+
+
+    <div class="jumbotron">
+        <h1>IS Restorana</h1>
+        <p class="lead">Nas informacioni sistem  vam nudi sledece opcije: </p>
+        <p><a href="@Url.Action("Create", "Racun")" class="btn btn-primary btn-lg">Kreiraj racun &dArr;</a></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Proizvodi</h2>
+            <p>
+                Pregled proizvoda detalja proizvoda, mogucnost izmene proizvoda i dodavanje novog proizvoda,
+                takodje nudimo automatsko porucivanje proizvoda kada je kolicina kriticno mala.
+            </p>
+            <p><a class="btn btn-primary" href="@Url.Action("Create", "Proizvod")">Proizvodi &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Racuni</h2>
+            <p>Dodavanje,zatvaranje i izmena racuna kao i dodavanje stavki racuna kada gost nesto naruci</p>
+            <p><a class="btn btn-primary" href="@Url.Action("Index", "Racun")">Racuni &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Rezervacije</h2>
+            <p>Imali ste muke sa rezervacijama? Koji je sto slobodan a koji nije, nas informacioni sistem vodi racuna o tome umesto Vas.</p>
+            <p><a class="btn btn-primary" href="@Url.Action("Create", "Rezervacija")">Rezervisi &raquo;</a></p>
+        </div>
+    </div>
+}
+else
+{
+    <h2>Jelovnik</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lager)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cena)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipProizvod.Naziv)
+            </th>
+            
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Naziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lager)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cena)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipProizvod.Naziv)
+                </td>
+               
+            </tr>
+
+        }
+
+
+    </table>
+}

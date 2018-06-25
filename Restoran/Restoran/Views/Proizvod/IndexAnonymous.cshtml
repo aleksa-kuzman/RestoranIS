@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Restoran.Models.Proizvod>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Meni</h2>
+
+<p>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipProizvod.Naziv)
+        </th>
+        <th>
+            Tip Proizvoda
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lager)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipProizvod.Naziv)
+        </td>
+        
+    </tr>
+}
+
+</table>

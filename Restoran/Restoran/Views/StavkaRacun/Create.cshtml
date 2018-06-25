@@ -1,0 +1,59 @@
+﻿@model Restoran.ViewModels.StavkaRacunaViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Dodaj stavku računa</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>StavkaRacuna</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.SifraRacuna, "SifraRacuna", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SifraRacuna", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SifraRacuna, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.proizvodId, "ProizvodId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.proizvodId, new SelectList(Model.proizvodiLista,"Id","Naziv"))
+                @*@Html.DropDownList("ProizvodId", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.proizvodId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.kolicina, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.kolicina, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.kolicina, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(m=>m.sifraRacuna)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Nazad na listu računa", "Index","Racun")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

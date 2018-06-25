@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Restoran.Models.Proizvod>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista proizvoda</h2>
+
+<p>
+    @Html.ActionLink("Dodaj proizvod", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lager)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipProizvod.Naziv)
+        </th>
+        <th>
+            Akcije
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lager)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipProizvod.Naziv)
+        </td>
+        <td>
+            @Html.ActionLink("Izmeni proizvod", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Detaljno", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Briši proizvod", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

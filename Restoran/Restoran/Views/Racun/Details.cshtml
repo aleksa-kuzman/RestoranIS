@@ -1,0 +1,64 @@
+﻿@model Restoran.ViewModels.RacunViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalji </h2>
+
+<div>
+    <h4>Racun</h4>
+    <hr />
+   
+   
+    <br />
+
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.brojStola)
+            </th>
+
+            <th>
+
+                @Html.DisplayFor(m => m.brojStola)
+            </th>
+        </tr>
+
+        <tr>
+            <th> Stavke racuna:</th>  
+            
+        </tr>
+
+        <tr>
+            <td><b> Naziv |</b></td> 
+
+            <td><b> Cena| </b></td>
+
+            <td><b> Kolicina| </b></td>
+
+
+        </tr>
+
+
+
+
+        @foreach (var item in Model.stavkeRacunaLista)
+     {
+        <tr>
+            <td> @Html.DisplayFor(modelItem => item.Proizvod.Naziv)</td>
+            <td>@Html.DisplayFor(modelItem => item.Proizvod.Cena)</td>
+            <td>@Html.DisplayFor(modelItem => item.Kolicina)</td>
+
+            
+        </tr>
+     }
+
+
+
+    </table>
+</div>
+<p>
+ @*   @Html.ActionLink("Edit", "Edit", new { id = Model.SifraRacuna }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>

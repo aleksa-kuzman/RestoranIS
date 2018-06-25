@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Restoran.Models.Racun>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista racuna</h2>
+
+<p>
+    @Html.ActionLink("Kreiraj nov racun", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Sto.BrojStola)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SifraRacuna)
+        </th>
+        <th>Akcije</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sto.BrojStola)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SifraRacuna)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.SifraRacuna }) |*@
+            @Html.ActionLink("Detaljno", "Details", new { id = item.SifraRacuna }) |
+            @Html.ActionLink("Zatvori racun", "Delete", new { id = item.SifraRacuna })
+            @Html.ActionLink("Dodaj stavku racuna", "Create", "StavkaRacun", new { sifraRacuna = item.SifraRacuna },null)
+
+        </td>
+    </tr>
+}
+
+</table>
